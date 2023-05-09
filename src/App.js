@@ -1,22 +1,18 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './Components/Header';
+import {Routes,Route} from 'react-router-dom';
+import Cards from './Components/Cards';
+import CardDetails from './Components/CardDetails';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Header/>
+    <Routes>
+    <Route path='/carts' element={<CardDetails/>}/>
+     <Route path='/' element={<Cards/>}/>
+     </Routes>
     </div>
   );
 }
