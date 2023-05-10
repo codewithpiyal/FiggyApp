@@ -21,11 +21,11 @@ function Header() {
     <div>
         <Navbar bg="dark" variant="dark" style={{height:60}}>
         <Container>
-          <NavLink to='/' className='text-decoration-none text-light mx-3'>Add To Cart</NavLink>
+          <NavLink to='/' className='text-decoration-none text-light mx-3' style={{fontWeight:900}} >Add To Cart</NavLink>
           <Nav className="me-auto">
-            <NavLink to='/' className='text-decoration-none text-light'>Home</NavLink>
+            <NavLink to='/' className='text-decoration-none text-light' style={{fontWeight:900}}>Home</NavLink>
           </Nav>
-          <Badge badgeContent={4} color="primary"
+          <Badge badgeContent={1} color="primary"
            id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
@@ -49,6 +49,7 @@ function Header() {
         onClick={handleClose}
         style={{position:"absolute",top:2,right:20,fontsize:23,cursor:"pointer"}}></i>
         <p style={{fontsize:22}}>Your Cart is Empty</p>
+        <img src='./CartImage.png' alt='cart_logo' style={{width:"8rem",padding:10}}/>
        </div>
       </Menu>
       </Navbar>
