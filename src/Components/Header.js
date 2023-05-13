@@ -1,20 +1,21 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Badge from '@mui/material/Badge';
 import {NavLink} from 'react-router-dom';
 import Menu from '@mui/material/Menu';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Table } from '@mui/material';
-
+import {Remove} from '../ReduxContainer/Action/action'
 
 
 function Header() {
 
   const getData= useSelector((state)=>state.actionToCart.carts)
   console.log(getData)
-
+   const[pricetag,setPriceTag]= useState(0)
+      const dispatch= useDispatch();
 
     const [anchorEl, setAnchorEl] = useState(null) ;
     const open = Boolean(anchorEl);
@@ -25,6 +26,20 @@ function Header() {
     setAnchorEl(null);
   };
 
+  const dLT=(id)=>{
+     dispatch(Remove(id))
+  }
+   const totalPrice=()=>{
+      let price=0;
+      getData.map((cElem)=>{
+        return price= cElem.price+price;
+      })
+      setPriceTag(price)
+   }
+
+   useEffect(()=>{
+    totalPrice();
+   },[totalPrice])
   return (
     <div>
         <Navbar bg="dark" variant="dark" style={{height:"60px"}}>
@@ -78,19 +93,20 @@ function Header() {
                             <p>{cElem.rname}</p>
                             <p> Price: ₹{cElem.price}</p>
                             <p>Quantity: {cElem.qnty}</p>
-                            <p style={{color:"red",fontSize:20,cursor:"pointer"}}>
+                            <p onClick={()=>dLT(cElem.id)}
+                             style={{color:"red",fontSize:20,cursor:"pointer"}}>
                               <i className='fas fa-trash smalltrash'></i>
                             </p>
                           </td>
-                          <td className='mt-4' style={{color:"red",fontSize:20,cursor:"pointer"}}>
-                            <i className='fas fa-trash largetrash'></i>
+                          <td className='mt-4' onClick={()=>dLT(cElem.id)} style={{color:"red",fontSize:20,cursor:"pointer"}}>
+                            <i className='fas fa-trash largetrash' ></i>
                           </td>
                         </tr>
                         </>
                       )
                     })
                   }
-                  <p> Total: ₹ 300</p>
+                  <p> Total: ₹ {pricetag}</p>
                 </tbody>
               </Table>
         </div>: <div className='card_details d-flex justify-content-center align-items-center' style={{width:"24rem",padding:10,position:'relative'}}>

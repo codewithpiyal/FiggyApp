@@ -8,6 +8,13 @@
             ...state,
             carts:[...state.carts,action.payload]
         }
+        case "RMV_Cart": 
+          const rmvData= state.carts.filter((cElem)=> cElem.id !== action.payload)
+
+        return {
+          ...state,
+          carts:rmvData
+      }
          default: return state
     }
   }
